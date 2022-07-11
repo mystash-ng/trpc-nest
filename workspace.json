@@ -4,6 +4,7 @@
   "projects": {
     "app": "apps/app",
     "app-e2e": "apps/app-e2e",
-    "server": "apps/server"
+    "server": "apps/server",
+    "trpc": "libs/trpc"
   }
 }

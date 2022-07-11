@@ -1,15 +1,25 @@
-import styled from 'styled-components';
 import NxWelcome from './nx-welcome';
+import { QueryClient, QueryClientProvider } from "react-query";
+import { trpc } from '../trpc';
+import { useState } from 'react';
 
-const StyledApp = styled.div`
-  // Your style here
-`;
+const client = new QueryClient();
 
-export function App() {
+
+
+function App() {
+  const [trpcClient] = useState(() => {
+    return trpc.createClient({
+      url: "http://localhost:3333/trpc"
+    })
+  })
+
   return (
-    <StyledApp>
-      <NxWelcome title="app" />
-    </StyledApp>
+    <trpc.Provider client={trpcClient} queryClient={client}>
+      <QueryClientProvider client={client}>
+          <NxWelcome title="app" />
+      </QueryClientProvider>
+    </trpc.Provider>
   );
 }
 
